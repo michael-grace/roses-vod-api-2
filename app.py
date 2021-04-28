@@ -1,4 +1,5 @@
 from aiohttp import web
+import aiohttp_cors
 import json
 import typing as T
 import random
@@ -76,8 +77,17 @@ with open("data.json") as f:
     vods = json.load(f)
 
 app = web.Application()
+cors = aiohttp_cors.setup(app)
+
+cors.add(app.router.add_get("/all_vods", get_all_vods), { #type: ignore
+    "https://roseslive.co.uk": aiohttp_cors.ResourceOptions(
+        allow_credentials=True,
+        allow_headers="*",
+        allow_methods="*"
+    )
+})
+
 app.add_routes([
-    web.get("/all_vods", get_all_vods),
     web.post("/vod", add_vod),
     web.patch("/vod/{id}", update_vod)
 ])
