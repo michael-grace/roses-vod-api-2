@@ -71,7 +71,8 @@ async def update_vod(req: web.Request) -> web.Response:
 
     return web.json_response(updated_vod)
   
-
+async def manage_redirect(_: web.Request) -> web.Response:
+    raise web.HTTPFound("/manage/index.html")
 
 with open("data.json") as f:
     vods = json.load(f)
@@ -89,7 +90,10 @@ cors.add(app.router.add_get("/all_vods", get_all_vods), { #type: ignore
 
 app.add_routes([
     web.post("/vod", add_vod),
-    web.patch("/vod/{id}", update_vod)
+    web.patch("/vod/{id}", update_vod),
+
+    web.get("/manage", manage_redirect),
+    web.static("/manage", "views")
 ])
 
 print("Starting Server")
