@@ -28,7 +28,11 @@ Response:
 
 To Describe
 
-* `PATCH /vod/id`
+* `PUT /vod/id`
+
+To Describe
+
+* `DELETE /vod/id`
 
 To Describe
 
