@@ -1,0 +1,10 @@
+{
+    "vods": [
+        {
+            "id": 123,
+            "title": "VOD Title",
+            "description": "VOD Description",
+            "url": "vod-url"
+        }
+    ]
+}
